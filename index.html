@@ -151,7 +151,7 @@
     .beacon-ring {
       animation: pulseBeacon 2.2s infinite ease-in-out;
     }
-  
+
     /* ===== Deep Black / Frosted Liquid Glass Theme ===== */
     :root {
       color-scheme: dark;
@@ -221,6 +221,140 @@
       box-shadow: 0 0 25px rgba(255,255,255,.07),inset 0 0 16px rgba(255,255,255,.035) !important;
     }
 
+    /* ===== TENET reference-screen visual system ===== */
+    :root { color-scheme: dark; }
+    html, body { min-height:100%; background:#02060b !important; }
+    body {
+      color:#dceeff !important;
+      background:
+        radial-gradient(circle at 50% 46%, rgba(0,112,170,.12), transparent 38%),
+        radial-gradient(circle at 50% 50%, transparent 0 40%, rgba(0,0,0,.5) 100%),
+        radial-gradient(1px 1px at 8% 14%,rgba(190,225,255,.8) 50%,transparent 100%),
+        radial-gradient(1px 1px at 18% 78%,rgba(190,225,255,.7) 50%,transparent 100%),
+        radial-gradient(1px 1px at 78% 18%,rgba(190,225,255,.7) 50%,transparent 100%),
+        radial-gradient(1px 1px at 92% 62%,rgba(190,225,255,.8) 50%,transparent 100%),
+        radial-gradient(1px 1px at 65% 86%,rgba(190,225,255,.6) 50%,transparent 100%),
+        #02060b !important;
+      background-attachment:fixed !important;
+    }
+    .bg-grid-pattern { background-image:none !important; }
+    /* Panels become floating translucent HUD groups: no card outlines. */
+    .hud-panel {
+      background:rgba(1,8,17,.62) !important;
+      border:0 !important;
+      border-radius:12px !important;
+      box-shadow:0 10px 34px rgba(0,0,0,.34) !important;
+      -webkit-backdrop-filter:blur(7px) saturate(125%) !important;
+      backdrop-filter:blur(7px) saturate(125%) !important;
+      overflow:hidden;
+    }
+    .hud-panel::before { display:none !important; }
+    .hud-glow-active { border:0 !important; box-shadow:0 0 22px rgba(0,210,255,.2) !important; }
+    header, footer {
+      background:rgba(0,4,10,.78) !important;
+      border:0 !important;
+      box-shadow:none !important;
+      -webkit-backdrop-filter:blur(12px) !important;
+      backdrop-filter:blur(12px) !important;
+    }
+    .nav-pill-active {
+      background:linear-gradient(180deg,rgba(0,205,255,.24),rgba(0,105,170,.10)) !important;
+      border:1px solid rgba(0,207,255,.72) !important;
+      color:#dffaff !important;
+      box-shadow:0 0 18px rgba(0,190,255,.32),inset 0 0 10px rgba(0,190,255,.12) !important;
+    }
+    .top-nav-btn:not(.nav-pill-active) {
+      border-color:rgba(75,160,205,.16) !important;
+      background:rgba(0,10,22,.56) !important;
+      color:#a9c1d4 !important;
+    }
+    .side-btn-active {
+      background:linear-gradient(90deg,rgba(0,195,255,.28),rgba(0,140,220,.04)) !important;
+      border-left:3px solid #00d9ff !important;
+      color:#6ceaff !important;
+      box-shadow:inset 0 0 18px rgba(0,195,255,.12) !important;
+    }
+    .side-nav-btn { min-width:100%; }
+    #primaryDashboardGrid > div, #primaryDashboardGrid section,
+    main > .grid > section { min-width:0; }
+
+    /* Live Three.js lunar globe: full-screen backdrop with interactive pointer access */
+    #moon3dContainer {
+      position:fixed !important;
+      inset:0 !important;
+      width:100vw !important;
+      height:100vh !important;
+      z-index:0 !important;
+      opacity:.86;
+      pointer-events:auto !important;
+      cursor:grab;
+      touch-action:none;
+      transition: opacity 0.35s ease;
+    }
+    #moon3dContainer:active {
+      cursor:grabbing;
+    }
+    #moon3dContainer canvas { width:100% !important; height:100% !important; display:block; }
+    body > header { position:relative; z-index:30; }
+    body > main, body > footer { position:relative; z-index:2; }
+
+    /* Allow pointer events through transparent center dashboard wrapper so the 3D Moon can be dragged/clicked directly */
+    #primaryDashboardGrid > div:nth-child(2) {
+      background:transparent !important;
+      box-shadow:none !important;
+      backdrop-filter:none !important;
+      -webkit-backdrop-filter:none !important;
+      overflow:visible !important;
+      pointer-events:none;
+    }
+    #primaryDashboardGrid > div:nth-child(2) > div:first-child,
+    #primaryDashboardGrid > div:nth-child(2) > #floatingSiteCallout,
+    #primaryDashboardGrid > div:nth-child(2) > div:last-child {
+      pointer-events:auto;
+    }
+
+    #floatingSiteCallout {
+      background:rgba(0,8,18,.82) !important;
+      border:1px solid rgba(0,211,255,.65) !important;
+      box-shadow:0 0 25px rgba(0,190,255,.24) !important;
+    }
+    input, select, textarea {
+      background:rgba(0,9,19,.82) !important;
+      border-color:rgba(0,190,230,.22) !important;
+      color:#e5f8ff !important;
+    }
+    button { text-shadow:0 0 10px rgba(0,190,255,.12); }
+    ::-webkit-scrollbar-track { background:#02060b !important; }
+    ::-webkit-scrollbar-thumb { background:rgba(0,190,235,.3) !important; }
+
+    /* ===== FULL-SCREEN INTERACTIVE 3D MAP MODE (body.mode-3d-map) ===== */
+    body.mode-3d-map {
+      overflow: hidden !important;
+      height: 100vh !important;
+    }
+    body.mode-3d-map #moon3dContainer {
+      opacity: 1 !important;
+      z-index: 5 !important;
+      pointer-events: auto !important;
+    }
+    body.mode-3d-map main,
+    body.mode-3d-map footer {
+      display: none !important;
+    }
+    body.mode-3d-map #full3dHudBar {
+      display: flex !important;
+    }
+
+    @media (min-width:1024px) {
+      main { padding:10px 14px !important; gap:10px !important; }
+      #primaryDashboardGrid { gap:10px !important; }
+      main > .grid { gap:10px !important; }
+      #primaryDashboardGrid > div:nth-child(2) { min-height:510px !important; }
+    }
+    @media (max-width:1023px) {
+      #moon3dContainer { opacity:.45; }
+      header { position:sticky; }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col bg-grid-pattern selection:bg-cyan-500/30 selection:text-cyan-100">
@@ -270,7 +404,7 @@
       </button>
     </nav>
 
-    <!-- Right: Lunar Time (LST), Date Picker, Systems Status & Brand Mark -->
+    <!-- Right: Lunar Time (LST), Date Picker, Systems Status -->
     <div class="flex items-center gap-3 sm:gap-4">
       <!-- Date Input for Launch Window Testing -->
       <div class="hidden xl:flex flex-col items-end">
@@ -289,8 +423,44 @@
       <div class="hidden sm:flex flex-col items-center px-2.5 py-1 rounded-xl bg-emerald-950/40 border border-emerald-500/30">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
         <span class="text-[10px] font-mono text-emerald-300 mt-0.5">Systems Online</span>
-      </div></div>
+      </div>
+    </div>
   </header>
+
+  <!-- ==================== FULL-SCREEN 3D GLOBE CANVAS (ALWAYS MOUNTED) ==================== -->
+  <div id="moon3dContainer" class="fixed inset-0 w-full h-full cursor-grab active:cursor-grabbing"></div>
+
+  <!-- ==================== SLEEK FLOATING HUD BAR FOR FULL-SCREEN 3D MAP MODE ==================== -->
+  <div id="full3dHudBar" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-30 w-[95vw] max-w-5xl flex-wrap items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-2xl bg-space-950/80 backdrop-blur-xl border border-cyan-400/40 shadow-[0_0_32px_rgba(0,229,255,0.22)]">
+    <!-- Active Target Readout -->
+    <div class="flex items-center gap-2.5 min-w-0">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#00ffa3] shrink-0"></span>
+      <div class="truncate">
+        <div class="flex items-center gap-2">
+          <span id="hud3dSiteName" class="text-xs sm:text-sm font-bold text-white truncate">Shackleton Rim</span>
+          <span id="hud3dScore" class="text-[11px] font-mono font-bold text-emerald-300 bg-emerald-500/15 px-1.5 py-0.2 rounded border border-emerald-400/30">97.6%</span>
+        </div>
+        <div id="hud3dCoords" class="text-[11px] font-mono text-cyan-200/90">89.6° S, 0.0° E · Drag 360° · Scroll Zoom · Click Surface</div>
+      </div>
+    </div>
+
+    <!-- Global Lunar Hemisphere & Pole Quick Camera Presets + Zoom -->
+    <div class="flex flex-wrap items-center gap-1.5">
+      <button data-cam-preset="south-pole" class="cam-preset-btn px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/50 text-[11px] font-mono text-cyan-100 transition">South Pole</button>
+      <button data-cam-preset="near-side" class="cam-preset-btn px-2.5 py-1 rounded-lg bg-space-900/90 hover:bg-cyan-950 border border-cyan-500/30 text-[11px] font-mono text-slate-200 transition">Near Side</button>
+      <button data-cam-preset="far-side" class="cam-preset-btn px-2.5 py-1 rounded-lg bg-space-900/90 hover:bg-cyan-950 border border-cyan-500/30 text-[11px] font-mono text-slate-200 transition">Far Side</button>
+      <button data-cam-preset="north-pole" class="cam-preset-btn px-2.5 py-1 rounded-lg bg-space-900/90 hover:bg-cyan-950 border border-cyan-500/30 text-[11px] font-mono text-slate-200 transition">North Pole</button>
+
+      <div class="h-4 w-px bg-cyan-500/25 mx-0.5 hidden sm:block"></div>
+
+      <button id="btn3dZoomIn" class="w-7 h-7 rounded-lg bg-space-900/90 hover:bg-cyan-950 border border-cyan-500/40 text-cyan-200 font-bold flex items-center justify-center transition" title="Zoom In">+</button>
+      <button id="btn3dZoomOut" class="w-7 h-7 rounded-lg bg-space-900/90 hover:bg-cyan-950 border border-cyan-500/40 text-cyan-200 font-bold flex items-center justify-center transition" title="Zoom Out">−</button>
+
+      <button id="btnExit3dMap" class="ml-1 px-3 py-1 rounded-lg bg-cyan-500/25 hover:bg-cyan-500/40 border border-cyan-300/70 text-[11px] font-mono font-semibold text-white flex items-center gap-1.5 shadow-[0_0_14px_rgba(0,229,255,0.28)] transition">
+        <span>←</span> Mission Control
+      </button>
+    </div>
+  </div>
 
   <!-- ==================== MAIN WORKSPACE ==================== -->
   <main class="flex-1 w-full max-w-[1920px] mx-auto p-2.5 sm:p-4 flex flex-col gap-3">
@@ -457,7 +627,7 @@
         </div>
       </div>
 
-      <!-- CENTER COLUMN: Interactive 3D Moon Viewport (6 cols on lg) -->
+      <!-- CENTER COLUMN: Interactive 3D Moon Viewport HUD Overlays (6 cols on lg) -->
       <div class="lg:col-span-6 hud-panel p-2.5 flex flex-col justify-between min-h-[430px] sm:min-h-[500px] relative overflow-hidden">
         <!-- Top Overlay Bar inside 3D Viewport -->
         <div class="flex flex-wrap items-center justify-between gap-2 z-10 px-1.5 pt-0.5">
@@ -478,9 +648,6 @@
           </form>
         </div>
 
-        <!-- Three.js WebGL Canvas Container -->
-        <div id="moon3dContainer" class="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"></div>
-
         <!-- Floating Active Landing Site Callout Overlay -->
         <div id="floatingSiteCallout" class="z-10 self-center sm:self-end sm:mr-6 mt-auto mb-3 bg-space-950/85 backdrop-blur-md border border-cyan-400/70 rounded-xl px-3.5 py-2 shadow-[0_0_24px_rgba(0,229,255,0.3)] pointer-events-auto transition-all">
           <div class="flex items-center gap-2">
@@ -494,7 +661,7 @@
           </div>
         </div>
 
-        <!-- Bottom Left Camera Controls (+, -, Focus South Pole, Texture Layer Toggle) -->
+        <!-- Bottom Left Camera Controls (+, -, Focus South Pole, Full 3D Map Shortcut) -->
         <div class="z-10 flex items-center justify-between gap-2 px-1.5 pb-0.5">
           <div class="flex items-center gap-1.5">
             <button id="btnZoomIn" class="w-8 h-8 rounded-lg bg-space-950/85 hover:bg-cyan-950 border border-cyan-500/40 text-cyan-200 font-bold flex items-center justify-center transition" title="Zoom In">+</button>
@@ -504,9 +671,9 @@
             </button>
           </div>
 
-          <div class="flex items-center gap-1.5 bg-space-950/85 border border-cyan-500/30 rounded-lg px-2.5 py-1 text-[10px] font-mono text-slate-300">
-            <span>Click globe to sample coords</span>
-          </div>
+          <button id="btnExpand3dHint" class="flex items-center gap-1.5 bg-space-950/85 hover:bg-cyan-950/90 border border-cyan-500/30 hover:border-cyan-400/60 rounded-lg px-2.5 py-1 text-[10px] font-mono text-cyan-200 transition">
+            <span>⛶</span> Click globe or open Full 3D Map
+          </button>
         </div>
       </div>
 
@@ -708,7 +875,7 @@
     <div class="font-mono text-cyan-300/80">TENET v1.0</div>
   </footer>
 
-  <!-- ==================== MODAL OVERLAYS (SITE COMPARISON / ADVISOR DETAILS / Lunar Data RESOURCES) ==================== -->
+  <!-- ==================== MODAL OVERLAYS (SITE COMPARISON / ADVISOR DETAILS / RESOURCES) ==================== -->
   <div id="modalBackdrop" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
     <div class="hud-panel max-w-4xl w-full max-h-[88vh] flex flex-col overflow-hidden border-cyan-400/50">
       <div class="flex items-center justify-between px-5 py-3.5 border-b border-cyan-500/25">
@@ -721,7 +888,7 @@
     </div>
   </div>
 
-  <!-- ==================== APPLICATION LOGIC & Lunar Data EPHEMERIS ENGINE ==================== -->
+  <!-- ==================== APPLICATION LOGIC & SELENOCENTRIC EPHEMERIS ENGINE ==================== -->
   <script>
     (function () {
       'use strict';
@@ -740,7 +907,6 @@
           elevationM: 1420,
           slopeDeg: 4.2,
           iceProximityKm: 1.8,
-          // 12 azimuth sectors (every 30 deg) representing local terrain horizon mask in degrees
           horizonMask: [1.2, 1.5, 2.1, 1.8, 0.9, 0.5, 0.4, 0.8, 1.6, 2.4, 2.8, 1.7],
           missionTag: 'Artemis III Candidate',
           notes: 'Peak of near-eternal light along the Shackleton-de Gerlache ridge; adjacent to permanently shadowed regions (PSRs) rich in water ice.'
@@ -824,16 +990,17 @@
         selectedSiteId: 'shackleton',
         customSite: null,
         baseDate: new Date('2026-11-15T14:32:17Z'),
-        simOffsetHours: 140, // Hours into the 29.530589-day synodic lunar cycle (0 to 708.73h)
+        simOffsetHours: 140,
         isPlaying: false,
-        simSpeed: 3600, // simulation seconds per real second
+        simSpeed: 3600,
         expertMode: true,
         activeTab: 'mission-control',
+        is3dMapMode: false,
         nasaTilesLoaded: false,
       };
 
       const SYNODIC_DAYS = 29.530589;
-      const SYNODIC_HOURS = SYNODIC_DAYS * 24; // 708.734 hours
+      const SYNODIC_HOURS = SYNODIC_DAYS * 24;
 
       function getActiveSite() {
         if (state.customSite) return state.customSite;
@@ -847,45 +1014,28 @@
       // =========================================================================
       // 3. SELENOCENTRIC EPHEMERIS & TERRAIN-AWARE VISIBILITY ENGINE
       // =========================================================================
-      /**
-       * Computes accurate selenocentric solar & terrestrial coordinates for a given
-       * lunar latitude, longitude, and UTC timestamp, accounting for:
-       * - Synodic lunar solar longitude (29.530589d cycle)
-       * - Lunar axial obliquity to the ecliptic (1.5424 deg)
-       * - Optical + physical libration in longitude (+/- 7.9 deg) and latitude (+/- 6.7 deg)
-       * - Orbital eccentricity (363,300 km perigee to 405,500 km apogee)
-       * - Local LOLA terrain horizon obstruction (no atmosphere -> zero refraction)
-       */
       function computeSiteTelemetry(site, simDate) {
         const deg2rad = Math.PI / 180;
         const rad2deg = 180 / Math.PI;
 
-        // Julian centuries since J2000.0
         const jd = simDate.getTime() / 86400000 + 2440587.5;
         const d = jd - 2451545.0;
 
-        // Mean solar selenographic longitude (subsolar longitude)
-        // Synodic period = 29.530588853 days
-        const synodicPhase = ((d / 29.530588853) % 1 + 1) % 1; // 0..1
-        const subsolarLon = ((180 - synodicPhase * 360 + 540) % 360) - 180; // -180..+180 deg
+        const synodicPhase = ((d / 29.530588853) % 1 + 1) % 1;
+        const subsolarLon = ((180 - synodicPhase * 360 + 540) % 360) - 180;
 
-        // Selenographic subsolar latitude (solar declination on Moon, +/- 1.5424 deg)
         const draconicAngle = (218.32 + 13.176396 * d) * deg2rad;
         const subsolarLat = 1.5424 * Math.sin(draconicAngle);
 
-        // Earth selenographic position (libration wobble around 0° lat, 0° lon)
-        const anomalisticAngle = (134.96 + 13.064993 * d) * deg2rad; // 27.55455d anomalistic month
-        const nodicalAngle = (93.27 + 13.229350 * d) * deg2rad;     // 27.21222d draconic month
+        const anomalisticAngle = (134.96 + 13.064993 * d) * deg2rad;
+        const nodicalAngle = (93.27 + 13.229350 * d) * deg2rad;
 
         const earthSubLat = 6.68 * Math.sin(nodicalAngle);
         const earthSubLon = 7.89 * Math.sin(anomalisticAngle);
 
-        // Earth-Moon distance (km) based on orbital eccentricity e = 0.0549
         const earthMoonDistanceKm = Math.round(384400 * (1 - 0.0549 * Math.cos(anomalisticAngle)));
-        // Vis-viva lunar orbital velocity (km/s)
         const orbitalVelocityKms = (Math.sqrt(398600.4 * (2 / earthMoonDistanceKm - 1 / 384400))).toFixed(3);
 
-        // Spherical astronomy: Elevation & Azimuth of Sun from (site.lat, site.lon)
         const latR = site.lat * deg2rad;
         const lonR = site.lon * deg2rad;
         const sLatR = subsolarLat * deg2rad;
@@ -906,7 +1056,6 @@
             360) %
           360;
 
-        // Spherical astronomy: Elevation & Azimuth of Earth from (site.lat, site.lon)
         const eLatR = earthSubLat * deg2rad;
         const eLonR = earthSubLon * deg2rad;
         const dLonEarth = eLonR - lonR;
@@ -925,15 +1074,12 @@
             360) %
           360;
 
-        // Interpolate local LOLA terrain horizon mask at Sun and Earth azimuths
         const sunHorizonAngle = getHorizonMaskAtAzimuth(site.horizonMask, sunAzimuth);
         const earthHorizonAngle = getHorizonMaskAtAzimuth(site.horizonMask, earthAzimuth);
 
-        // No-atmosphere visibility check: Target visible iff TargetElevation > LocalTerrainHorizon
         const sunVisible = sunElevation > sunHorizonAngle;
         const earthVisible = earthElevation > earthHorizonAngle;
 
-        // Compute full synodic lunar cycle curve (72 samples across 29.53 days)
         const curveSamples = [];
         let sunlitSamples = 0;
         let earthVisSamples = 0;
@@ -1020,8 +1166,6 @@
         const sunlightPct = Math.round((sunlitSamples / steps) * 100);
         const earthVisPct = Math.round((earthVisSamples / steps) * 100);
 
-        // Composite Mission Viability Score (0 - 100%)
-        // Weighted by: Sunlight availability (42%), Earth DTE comms (33%), Slope safety (15%), Volatile proximity (10%)
         const slopeScore = Math.max(0, Math.min(100, 100 - site.slopeDeg * 4.2));
         const iceScore = Math.max(35, Math.min(100, 100 - site.iceProximityKm * 1.1));
         const rawScore =
@@ -1079,19 +1223,19 @@
       }
 
       // =========================================================================
-      // 4. THREE.JS 3D INTERACTIVE MOON WITH Lunar Data MOON TREK WMTS TILES & LOLA DEM
+      // 4. THREE.JS 3D INTERACTIVE MOON WITH LUNAR MAPPING WMTS TILES & LOLA DEM
       // =========================================================================
       let scene, camera, renderer, moonMesh, sunLight, earthMesh, siteBeaconGroup, ringGroup;
       let isDraggingGlobe = false;
       let prevPointer = { x: 0, y: 0 };
-      let targetCameraSpherical = { radius: 3.15, theta: 0.15, phi: 2.35 }; // Focused toward South Pole
-      let currentCameraSpherical = { radius: 3.15, theta: 0.15, phi: 2.35 };
+      let targetCameraSpherical = { radius: 2.75, theta: 0.15, phi: 2.35 };
+      let currentCameraSpherical = { radius: 2.75, theta: 0.15, phi: 2.35 };
       const beaconMeshes = [];
 
       function initThreeJsMoon() {
         const container = document.getElementById('moon3dContainer');
-        const width = container.clientWidth || 640;
-        const height = container.clientHeight || 480;
+        const width = container.clientWidth || window.innerWidth;
+        const height = container.clientHeight || window.innerHeight;
 
         scene = new THREE.Scene();
 
@@ -1102,12 +1246,12 @@
         renderer.setSize(width, height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.15;
+        renderer.toneMappingExposure = 1.18;
         container.appendChild(renderer.domElement);
 
         // Starfield Background
         const starGeo = new THREE.BufferGeometry();
-        const starCount = 1600;
+        const starCount = 1800;
         const starPositions = new Float32Array(starCount * 3);
         for (let i = 0; i < starCount * 3; i += 3) {
           const r = 24 + Math.random() * 25;
@@ -1120,7 +1264,7 @@
           starPositions[i + 2] = r * Math.sin(phi) * Math.sin(theta);
         }
         starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-        const starMat = new THREE.PointsMaterial({ color: 0xbbe8ff, size: 0.08, transparent: true, opacity: 0.75 });
+        const starMat = new THREE.PointsMaterial({ color: 0xbbe8ff, size: 0.08, transparent: true, opacity: 0.78 });
         scene.add(new THREE.Points(starGeo, starMat));
 
         // Lighting: Directional Sunlight + subtle Earthshine ambient fill so night side remains readable
@@ -1128,7 +1272,7 @@
         sunLight.position.set(5, 0.5, 4);
         scene.add(sunLight);
 
-        const earthShineAmbient = new THREE.AmbientLight(0x284b7a, 0.42);
+        const earthShineAmbient = new THREE.AmbientLight(0x284b7a, 0.44);
         scene.add(earthShineAmbient);
 
         const rimBackLight = new THREE.DirectionalLight(0x00b8ff, 0.35);
@@ -1148,14 +1292,14 @@
         const moonTexture = new THREE.CanvasTexture(albedoCanvas);
         const bumpTexture = new THREE.CanvasTexture(bumpCanvas);
 
-        // Attempt to composite real Lunar Mapping WMTS tiles (Zoom Level 2: 8 cols x 4 rows)
+        // Composite real Lunar Mapping WMTS tiles (Zoom Level 2: 8 cols x 4 rows)
         loadNasaMoonTrekTiles(albedoCanvas, moonTexture);
 
         const moonGeometry = new THREE.SphereGeometry(1, 96, 96);
         const moonMaterial = new THREE.MeshStandardMaterial({
           map: moonTexture,
           bumpMap: bumpTexture,
-          bumpScale: 0.024,
+          bumpScale: 0.025,
           roughness: 0.92,
           metalness: 0.04,
         });
@@ -1218,18 +1362,14 @@
         // Resize Handler
         window.addEventListener('resize', () => {
           if (!container || !renderer || !camera) return;
-          const w = container.clientWidth;
-          const h = container.clientHeight;
+          const w = container.clientWidth || window.innerWidth;
+          const h = container.clientHeight || window.innerHeight;
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
           renderer.setSize(w, h);
         });
       }
 
-      /**
-       * Fetches real Lunar Mapping WMTS global mosaic tiles (LRO_WAC_Mosaic_Global_303ppd_v02)
-       * at zoom level 2 (8x4 tiles) and composites them directly onto the 3D Moon albedo texture.
-       */
       function loadNasaMoonTrekTiles(targetCanvas, threeTexture) {
         const ctx = targetCanvas.getContext('2d');
         const statusEl = document.getElementById('nasaTileStatus');
@@ -1249,7 +1389,6 @@
           for (let x = 0; x < cols; x++) {
             const img = new Image();
             img.crossOrigin = 'anonymous';
-            // Official Lunar Mapping WMTS REST endpoint
             img.src = `https://trek.nasa.gov/tiles/Moon/EQ/LRO_WAC_Mosaic_Global_303ppd_v02/1.0.0/default/default028mm/${zoom}/${y}/${x}.jpg`;
 
             img.onload = () => {
@@ -1266,7 +1405,7 @@
             img.onerror = () => {
               errorCount++;
               if (errorCount === totalTiles && loadedCount === 0) {
-                statusEl.textContent = 'Lunar Data LOLA/WAC DEM Synthesis Active';
+                statusEl.textContent = 'LOLA/WAC DEM Synthesis Active';
                 dotEl.className = 'w-2 h-2 rounded-full bg-cyan-400';
               }
             };
@@ -1274,23 +1413,17 @@
         }
       }
 
-      /**
-       * High-detail procedural lunar mare + LOLA crater relief generator
-       * Used immediately on boot and preserved as the LOLA bump/relief heightmap.
-       */
       function generateProceduralLunarMaps(albedoCanvas, bumpCanvas) {
         const aCtx = albedoCanvas.getContext('2d');
         const bCtx = bumpCanvas.getContext('2d');
         const w = albedoCanvas.width;
         const h = albedoCanvas.height;
 
-        // Highland regolith base
         aCtx.fillStyle = '#8b929a';
         aCtx.fillRect(0, 0, w, h);
         bCtx.fillStyle = '#808080';
         bCtx.fillRect(0, 0, w, h);
 
-        // Dark basaltic Lunar Maria (Oceanus Procellarum, Mare Tranquillitatis, Mare Imbrium, etc.)
         const maria = [
           { x: 0.36, y: 0.34, rx: 0.13, ry: 0.16, rot: 0.2 },
           { x: 0.45, y: 0.28, rx: 0.09, ry: 0.08, rot: -0.1 },
@@ -1314,7 +1447,6 @@
           aCtx.restore();
         });
 
-        // Deterministic seeded pseudo-random craters (especially dense near South Pole)
         let seed = 4219;
         function rand() {
           seed = (seed * 16807) % 2147483647;
@@ -1323,11 +1455,9 @@
 
         for (let i = 0; i < 650; i++) {
           const cx = rand() * w;
-          // Concentrate extra craters in southern highlands
           const cy = i < 240 ? (0.68 + rand() * 0.31) * h : rand() * h;
           const r = (i < 60 ? 12 + rand() * 24 : 2 + rand() * 11);
 
-          // Albedo crater rim & floor
           const cGrad = aCtx.createRadialGradient(cx, cy, r * 0.1, cx, cy, r);
           cGrad.addColorStop(0, 'rgba(58, 63, 70, 0.65)');
           cGrad.addColorStop(0.78, 'rgba(85, 91, 99, 0.45)');
@@ -1338,7 +1468,6 @@
           aCtx.arc(cx, cy, r, 0, Math.PI * 2);
           aCtx.fill();
 
-          // Bump map crater depression + raised rim
           const bGrad = bCtx.createRadialGradient(cx, cy, r * 0.1, cx, cy, r);
           bGrad.addColorStop(0, 'rgba(30, 30, 30, 0.85)');
           bGrad.addColorStop(0.75, 'rgba(70, 70, 70, 0.6)');
@@ -1350,7 +1479,6 @@
           bCtx.fill();
         }
 
-        // Tycho & South Pole ejecta rays
         const rayCenters = [
           { x: 0.46 * w, y: 0.74 * h, len: 120 },
           { x: 0.50 * w, y: 0.96 * h, len: 95 },
@@ -1379,7 +1507,6 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
 
-        // Continents & cloud swirls
         ctx.fillStyle = 'rgba(56, 178, 115, 0.65)';
         ctx.beginPath();
         ctx.ellipse(w * 0.35, h * 0.42, 34, 22, 0.3, 0, Math.PI * 2);
@@ -1394,9 +1521,6 @@
         }
       }
 
-      /**
-       * Converts selenographic (lat, lon) in degrees to 3D Cartesian coordinates on unit sphere.
-       */
       function latLonToVector3(latDeg, lonDeg, radius = 1.015) {
         const phi = ((90 - latDeg) * Math.PI) / 180;
         const theta = ((lonDeg + 180) * Math.PI) / 180;
@@ -1432,7 +1556,6 @@
           group.position.copy(pos);
           group.lookAt(0, 0, 0);
 
-          // Core glowing dot
           const dotGeo = new THREE.SphereGeometry(isSelected ? 0.024 : 0.015, 16, 16);
           const dotMat = new THREE.MeshBasicMaterial({
             color: isSelected ? 0x00ffa3 : 0x00e5ff,
@@ -1440,7 +1563,6 @@
           const dot = new THREE.Mesh(dotGeo, dotMat);
           group.add(dot);
 
-          // Outer reticle ring
           const ringGeo = new THREE.RingGeometry(isSelected ? 0.036 : 0.022, isSelected ? 0.048 : 0.029, 32);
           const ringMat = new THREE.MeshBasicMaterial({
             color: isSelected ? 0x00e5ff : 0x38bdf8,
@@ -1485,8 +1607,8 @@
 
           targetCameraSpherical.theta -= dx * 0.0065;
           targetCameraSpherical.phi = Math.max(
-            0.15,
-            Math.min(Math.PI - 0.15, targetCameraSpherical.phi - dy * 0.0065)
+            0.12,
+            Math.min(Math.PI - 0.12, targetCameraSpherical.phi - dy * 0.0065)
           );
         });
 
@@ -1494,7 +1616,6 @@
           if (!isDraggingGlobe) return;
           isDraggingGlobe = false;
 
-          // Detect click (minimal drag movement) to select a beacon or sample any lunar coordinate
           const moveDist = Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y);
           if (moveDist < 5 && e.target === renderer.domElement) {
             const rect = renderer.domElement.getBoundingClientRect();
@@ -1503,7 +1624,6 @@
 
             raycaster.setFromCamera(pointer, camera);
 
-            // First check landing site beacons
             const beaconHits = raycaster.intersectObjects(beaconMeshes);
             if (beaconHits.length > 0) {
               const hitSiteId = beaconHits[0].object.userData.siteId;
@@ -1511,7 +1631,6 @@
               return;
             }
 
-            // Otherwise raycast Moon surface to create a custom target coordinate
             const moonHits = raycaster.intersectObject(moonMesh);
             if (moonHits.length > 0) {
               const coords = vector3ToLatLon(moonHits[0].point);
@@ -1525,8 +1644,8 @@
           (e) => {
             e.preventDefault();
             targetCameraSpherical.radius = Math.max(
-              1.65,
-              Math.min(5.2, targetCameraSpherical.radius + e.deltaY * 0.0018)
+              1.45,
+              Math.min(5.5, targetCameraSpherical.radius + e.deltaY * 0.0018)
             );
           },
           { passive: false }
@@ -1536,12 +1655,41 @@
       function focusCameraOnSite(site) {
         const phi = ((90 - site.lat) * Math.PI) / 180;
         const theta = ((site.lon + 90) * Math.PI) / 180;
-        targetCameraSpherical.phi = Math.max(0.22, Math.min(Math.PI - 0.22, phi));
+        targetCameraSpherical.phi = Math.max(0.18, Math.min(Math.PI - 0.18, phi));
         targetCameraSpherical.theta = theta;
       }
 
       // =========================================================================
-      // 5. MINI 3D LOLA DEM WIREFRAME MESH (BOTTOM RIGHT PANEL)
+      // 5. MODE SWITCHING: FULL-SCREEN 3D MAP VS MISSION CONTROL DASHBOARD
+      // =========================================================================
+      function setActiveTopTabPill(tabName) {
+        document.querySelectorAll('.top-nav-btn').forEach((b) => {
+          b.classList.remove('nav-pill-active', 'text-white');
+          b.classList.add('text-slate-300');
+          if (b.dataset.tab === tabName) {
+            b.classList.add('nav-pill-active', 'text-white');
+            b.classList.remove('text-slate-300');
+          }
+        });
+      }
+
+      function enterFull3dMapMode() {
+        state.is3dMapMode = true;
+        state.activeTab = '3d-map';
+        document.body.classList.add('mode-3d-map');
+        setActiveTopTabPill('3d-map');
+        targetCameraSpherical.radius = Math.min(targetCameraSpherical.radius, 2.55);
+      }
+
+      function exitFull3dMapMode() {
+        state.is3dMapMode = false;
+        state.activeTab = 'mission-control';
+        document.body.classList.remove('mode-3d-map');
+        setActiveTopTabPill('mission-control');
+      }
+
+      // =========================================================================
+      // 6. MINI 3D LOLA DEM WIREFRAME MESH (BOTTOM RIGHT PANEL)
       // =========================================================================
       let wireCtx, wireCanvas;
       let wirePhase = 0;
@@ -1552,7 +1700,7 @@
       }
 
       function renderWireframeTerrain(site) {
-        if (!wireCtx || !wireCanvas) return;
+        if (!wireCtx || !wireCanvas || state.is3dMapMode) return;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const w = wireCanvas.clientWidth || 140;
         const h = wireCanvas.clientHeight || 112;
@@ -1576,13 +1724,11 @@
             const nx = c / (cols - 1) - 0.5;
             const ny = r / (rows - 1) - 0.5;
             const distFromCenter = Math.hypot(nx, ny);
-            // Crater rim & basin elevation formula modulated by site slope
             const rimHeight =
               Math.exp(-Math.pow((distFromCenter - 0.28) * 6.5, 2)) * 18 * slopeFactor -
               Math.exp(-Math.pow(distFromCenter * 5.5, 2)) * 12 * slopeFactor +
               Math.sin(nx * 9 + wirePhase) * 2.5;
 
-            // Isometric projection
             const isoX = w * 0.5 + (nx - ny) * (w * 0.58);
             const isoY = h * 0.56 + (nx + ny) * (h * 0.34) - rimHeight;
 
@@ -1598,7 +1744,7 @@
       }
 
       // =========================================================================
-      // 6. SVG CHARTS: 360° HORIZON PROFILE & ILLUMINATION / EARTH VISIBILITY CURVE
+      // 7. SVG CHARTS: 360° HORIZON PROFILE & ILLUMINATION / EARTH VISIBILITY CURVE
       // =========================================================================
       function renderHorizonSparkline(site, telemetry) {
         const svg = document.getElementById('horizonSparklineSvg');
@@ -1606,7 +1752,6 @@
         const maxMask = Math.max(...mask);
         document.getElementById('horizonPeakLabel').textContent = `Max Rim: ${maxMask >= 0 ? '+' : ''}${maxMask.toFixed(1)}°`;
 
-        // Map -3° to +6° elevation into SVG height 56..4
         const mapY = (deg) => 54 - ((deg + 3) / 9) * 48;
 
         let pathD = `M 0 60 `;
@@ -1650,7 +1795,6 @@
         const plotW = 320 - padL - padR;
         const plotH = 150 - padT - padB;
 
-        // Elevation scale: -15° to +35° (or dynamically expand for mid-latitude sites)
         const minDeg = -15;
         const maxDeg = Math.max(30, Math.ceil(telemetry.maxSunElev / 10) * 10 + 5);
 
@@ -1695,38 +1839,28 @@
             </linearGradient>
           </defs>
 
-          <!-- Horizontal Reference Grid Lines -->
           <line x1="${padL}" y1="${padT}" x2="${padL + plotW}" y2="${padT}" stroke="rgba(148,163,184,0.15)" stroke-width="1" />
           <line x1="${padL}" y1="${zeroY}" x2="${padL + plotW}" y2="${zeroY}" stroke="rgba(255,255,255,0.28)" stroke-width="1" />
           <line x1="${padL}" y1="${padT + plotH}" x2="${padL + plotW}" y2="${padT + plotH}" stroke="rgba(148,163,184,0.15)" stroke-width="1" />
 
-          <!-- Y-Axis Labels -->
           <text x="2" y="${padT + 4}" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">+${maxDeg}°</text>
           <text x="8" y="${parseFloat(zeroY) + 3}" fill="#cbd5e1" font-size="8" font-family="JetBrains Mono">0°</text>
           <text x="2" y="${padT + plotH}" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">${minDeg}°</text>
 
-          <!-- X-Axis Lunar Day Markers -->
           <text x="${padL}" y="145" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">Now</text>
           <text x="${padL + plotW * 0.25 - 8}" y="145" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">+7d</text>
           <text x="${padL + plotW * 0.5 - 10}" y="145" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">+14.8d</text>
           <text x="${padL + plotW * 0.75 - 10}" y="145" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">+22d</text>
           <text x="${padL + plotW - 24}" y="145" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">+29.5d</text>
 
-          <!-- Local Terrain Horizon Obstruction Threshold -->
           <path d="${maskPath}" fill="none" stroke="rgba(251, 113, 133, 0.75)" stroke-width="1.2" stroke-dasharray="3 2" />
-
-          <!-- Earth Elevation Curve -->
           <path d="${earthPath}" fill="none" stroke="#00e5ff" stroke-width="1.8" />
-
-          <!-- Sun Elevation Curve & Area -->
           <path d="${sunArea}" fill="url(#sunAreaGrad)" />
           <path d="${sunPath}" fill="none" stroke="#fbbf24" stroke-width="2" />
 
-          <!-- Current Time Marker (t=0) -->
           <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="#00ffa3" stroke-width="1.5" />
           <circle cx="${padL}" cy="${toY(telemetry.sunElevation).toFixed(1)}" r="3.5" fill="#fbbf24" stroke="#030811" stroke-width="1.2" />
 
-          <!-- Peak Solar Elevation Callout -->
           <circle cx="${peakX}" cy="${peakY}" r="3" fill="#fbbf24" />
           <text x="${Math.min(235, Math.max(padL + 6, parseFloat(peakX) - 24))}" y="${Math.max(11, parseFloat(peakY) - 6)}" fill="#fde047" font-size="8.5" font-weight="600" font-family="JetBrains Mono">
             Max: ${telemetry.maxSunElev.toFixed(1)}°
@@ -1735,7 +1869,7 @@
       }
 
       // =========================================================================
-      // 7. UI UPDATE & SITE COMPARISON CARDS
+      // 8. UI UPDATE & SITE COMPARISON CARDS
       // =========================================================================
       function renderSiteComparisonCards(simDate) {
         const container = document.getElementById('siteComparisonCards');
@@ -1752,7 +1886,6 @@
               <button data-site-id="${site.id}" class="site-card-btn text-left rounded-xl p-2 border transition flex flex-col justify-between bg-space-950/75 hover:bg-space-900/90 ${
                 isSelected ? 'hud-glow-active' : 'border-cyan-500/20 hover:border-cyan-400/50'
               }">
-                <!-- Mini Crater Thumbnail SVG -->
                 <div class="w-full h-12 rounded-lg bg-slate-900 border border-cyan-500/20 overflow-hidden relative mb-1.5">
                   <svg viewBox="0 0 100 48" class="w-full h-full">
                     <defs>
@@ -1781,7 +1914,6 @@
                   }">${tel.viabilityScore.toFixed(1)}%</div>
                 </div>
 
-                <!-- Segmented Power/Comms Health Bar -->
                 <div class="grid grid-cols-4 gap-1 mt-1.5">
                   ${[1, 2, 3, 4]
                     .map(
@@ -1853,10 +1985,13 @@
           losBadge.className = 'text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30';
         }
 
-        // Center Floating Callout & Coordinate Inputs
+        // Center Floating Callout & Full-Screen 3D HUD Bar & Coordinate Inputs
         document.getElementById('calloutSiteName').textContent = site.name;
         document.getElementById('calloutCoords').textContent = formatCoords(site.lat, site.lon);
         document.getElementById('calloutScore').textContent = `${tel.viabilityScore.toFixed(1)}%`;
+        document.getElementById('hud3dSiteName').textContent = site.name;
+        document.getElementById('hud3dScore').textContent = `${tel.viabilityScore.toFixed(1)}%`;
+        document.getElementById('hud3dCoords').textContent = `${formatCoords(site.lat, site.lon)} · LOLA Elev: ${site.elevationM >= 0 ? '+' : ''}${site.elevationM}m · Drag 360° · Scroll Zoom`;
         document.getElementById('inputLat').value = site.lat.toFixed(1);
         document.getElementById('inputLon').value = site.lon.toFixed(1);
 
@@ -1925,7 +2060,7 @@
       }
 
       // =========================================================================
-      // 8. SITE SELECTION & INTERACTIVE MODALS
+      // 9. SITE SELECTION & INTERACTIVE MODALS
       // =========================================================================
       function selectLandingSite(siteId) {
         state.selectedSiteId = siteId;
@@ -1940,7 +2075,6 @@
         const clampedLat = Math.max(-90, Math.min(90, lat));
         const clampedLon = Math.max(-180, Math.min(180, lon));
 
-        // Synthesize realistic LOLA elevation & horizon profile for custom coordinates
         const polarFactor = Math.abs(clampedLat) / 90;
         const synthElevation = Math.round(
           Math.sin(clampedLat * 0.25) * 1400 + Math.cos(clampedLon * 0.18) * 950 + polarFactor * 600
@@ -2039,7 +2173,6 @@
         const simDate = getCurrentSimDate();
         const tel = computeSiteTelemetry(site, simDate);
 
-        // Compute +14-day launch slip comparison
         const delayedDate = new Date(simDate.getTime() + 14 * 86400 * 1000);
         const delayedTel = computeSiteTelemetry(site, delayedDate);
 
@@ -2093,7 +2226,7 @@
           'Lunar Mapping WMTS & Ephemeris Data Architecture',
           `
           <p class="text-slate-300 leading-relaxed">
-            <strong>TENET — Lunar Mission Navigator</strong> integrates official Lunar Data planetary data services and selenocentric celestial mechanics to bridge complex orbital analysis and agile mission planning:
+            <strong>TENET — Lunar Mission Navigator</strong> integrates official planetary data services and selenocentric celestial mechanics to bridge complex orbital analysis and agile mission planning:
           </p>
           <div class="space-y-2.5 font-mono text-[11px]">
             <div class="bg-space-950/85 p-3 rounded-xl border border-cyan-500/25">
@@ -2123,26 +2256,52 @@
       };
 
       // =========================================================================
-      // 9. EVENT LISTENERS & MAIN ANIMATION LOOP
+      // 10. EVENT LISTENERS & MAIN ANIMATION LOOP
       // =========================================================================
       function bindUiEvents() {
         // Top Navigation Tabs
         document.querySelectorAll('.top-nav-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
-            document.querySelectorAll('.top-nav-btn').forEach((b) => {
-              b.classList.remove('nav-pill-active', 'text-white');
-              b.classList.add('text-slate-300');
-            });
-            btn.classList.add('nav-pill-active', 'text-white');
-            btn.classList.remove('text-slate-300');
-
             const tab = btn.dataset.tab;
-            if (tab === 'analysis') showAdvisorDetailsModal();
-            else if (tab === 'planning') showAllSitesComparisonModal();
-            else if (tab === 'resources') showNasaResourcesModal();
-            else if (tab === '3d-map') {
-              targetCameraSpherical.radius = 2.35;
-              focusCameraOnSite(getActiveSite());
+            if (tab === 'mission-control') {
+              exitFull3dMapMode();
+            } else if (tab === '3d-map') {
+              enterFull3dMapMode();
+            } else if (tab === 'analysis') {
+              setActiveTopTabPill('analysis');
+              showAdvisorDetailsModal();
+            } else if (tab === 'planning') {
+              setActiveTopTabPill('planning');
+              showAllSitesComparisonModal();
+            } else if (tab === 'resources') {
+              setActiveTopTabPill('resources');
+              showNasaResourcesModal();
+            }
+          });
+        });
+
+        // Full-Screen 3D Map HUD Bar Controls
+        document.getElementById('btnExit3dMap').addEventListener('click', exitFull3dMapMode);
+        document.getElementById('btnExpand3dHint').addEventListener('click', enterFull3dMapMode);
+
+        document.getElementById('btn3dZoomIn').addEventListener('click', () => {
+          targetCameraSpherical.radius = Math.max(1.45, targetCameraSpherical.radius - 0.35);
+        });
+        document.getElementById('btn3dZoomOut').addEventListener('click', () => {
+          targetCameraSpherical.radius = Math.min(5.5, targetCameraSpherical.radius + 0.35);
+        });
+
+        document.querySelectorAll('.cam-preset-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const preset = btn.dataset.camPreset;
+            if (preset === 'south-pole') {
+              targetCameraSpherical = { radius: 2.55, theta: 0.12, phi: 2.75 };
+            } else if (preset === 'north-pole') {
+              targetCameraSpherical = { radius: 2.55, theta: 0.12, phi: 0.38 };
+            } else if (preset === 'near-side') {
+              targetCameraSpherical = { radius: 2.65, theta: Math.PI / 2, phi: Math.PI / 2 };
+            } else if (preset === 'far-side') {
+              targetCameraSpherical = { radius: 2.65, theta: -Math.PI / 2, phi: Math.PI / 2 };
             }
           });
         });
@@ -2182,15 +2341,15 @@
           }
         });
 
-        // Camera Zoom & South Pole Reset
+        // Camera Zoom & South Pole Reset (Mission Control view)
         document.getElementById('btnZoomIn').addEventListener('click', () => {
-          targetCameraSpherical.radius = Math.max(1.65, targetCameraSpherical.radius - 0.35);
+          targetCameraSpherical.radius = Math.max(1.45, targetCameraSpherical.radius - 0.35);
         });
         document.getElementById('btnZoomOut').addEventListener('click', () => {
-          targetCameraSpherical.radius = Math.min(5.2, targetCameraSpherical.radius + 0.35);
+          targetCameraSpherical.radius = Math.min(5.5, targetCameraSpherical.radius + 0.35);
         });
         document.getElementById('btnFocusPole').addEventListener('click', () => {
-          targetCameraSpherical = { radius: 2.85, theta: 0.1, phi: 2.75 };
+          targetCameraSpherical = { radius: 2.75, theta: 0.1, phi: 2.75 };
         });
 
         // Simulation Playback Controls
@@ -2228,9 +2387,28 @@
         // Modals
         document.getElementById('btnViewAllSites').addEventListener('click', showAllSitesComparisonModal);
         document.getElementById('btnAdvisorDetails').addEventListener('click', showAdvisorDetailsModal);
-        document.getElementById('btnCloseModal').addEventListener('click', closeModal);
+        document.getElementById('btnCloseModal').addEventListener('click', () => {
+          closeModal();
+          setActiveTopTabPill(state.is3dMapMode ? '3d-map' : 'mission-control');
+        });
         document.getElementById('modalBackdrop').addEventListener('click', (e) => {
-          if (e.target.id === 'modalBackdrop') closeModal();
+          if (e.target.id === 'modalBackdrop') {
+            closeModal();
+            setActiveTopTabPill(state.is3dMapMode ? '3d-map' : 'mission-control');
+          }
+        });
+
+        // ESC key returns from modal or 3D Map mode
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            const backdrop = document.getElementById('modalBackdrop');
+            if (!backdrop.classList.contains('hidden')) {
+              closeModal();
+              setActiveTopTabPill(state.is3dMapMode ? '3d-map' : 'mission-control');
+            } else if (state.is3dMapMode) {
+              exitFull3dMapMode();
+            }
+          }
         });
 
         // Expert / Public Mode Toggle
@@ -2251,17 +2429,14 @@
         const dtSec = Math.min(0.1, (now - lastFrameTime) / 1000);
         lastFrameTime = now;
 
-        // Smooth camera spherical interpolation
         currentCameraSpherical.radius += (targetCameraSpherical.radius - currentCameraSpherical.radius) * 0.1;
         currentCameraSpherical.theta += (targetCameraSpherical.theta - currentCameraSpherical.theta) * 0.1;
         currentCameraSpherical.phi += (targetCameraSpherical.phi - currentCameraSpherical.phi) * 0.1;
         updateCameraPositionFromSpherical();
 
-        // Subtle orbital ring & Earth rotation
         if (ringGroup) ringGroup.rotation.z += dtSec * 0.04;
         if (earthMesh) earthMesh.rotation.y += dtSec * 0.08;
 
-        // Advance simulation clock if playing
         if (state.isPlaying) {
           state.simOffsetHours = (state.simOffsetHours + (dtSec * state.simSpeed) / 3600) % SYNODIC_HOURS;
           uiThrottleTimer += dtSec;
@@ -2271,10 +2446,8 @@
           }
         }
 
-        // Render mini 3D wireframe DEM mesh
         renderWireframeTerrain(getActiveSite());
 
-        // Render Three.js WebGL scene
         if (renderer && scene && camera) {
           renderer.render(scene, camera);
         }
