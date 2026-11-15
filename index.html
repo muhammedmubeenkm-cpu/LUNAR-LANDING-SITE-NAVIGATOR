@@ -1228,8 +1228,8 @@
       let scene, camera, renderer, moonMesh, sunLight, earthMesh, siteBeaconGroup, ringGroup;
       let isDraggingGlobe = false;
       let prevPointer = { x: 0, y: 0 };
-      let targetCameraSpherical = { radius: 2.75, theta: 0.15, phi: 2.35 };
-      let currentCameraSpherical = { radius: 2.75, theta: 0.15, phi: 2.35 };
+      let targetCameraSpherical = { radius: 4.6, theta: 0.15, phi: 2.35 };
+      let currentCameraSpherical = { radius: 4.6, theta: 0.15, phi: 2.35 };
       const beaconMeshes = [];
 
       function initThreeJsMoon() {
@@ -1645,7 +1645,7 @@
             e.preventDefault();
             targetCameraSpherical.radius = Math.max(
               1.45,
-              Math.min(5.5, targetCameraSpherical.radius + e.deltaY * 0.0018)
+              Math.min(6.5, targetCameraSpherical.radius + e.deltaY * 0.0018)
             );
           },
           { passive: false }
@@ -2288,7 +2288,7 @@
           targetCameraSpherical.radius = Math.max(1.45, targetCameraSpherical.radius - 0.35);
         });
         document.getElementById('btn3dZoomOut').addEventListener('click', () => {
-          targetCameraSpherical.radius = Math.min(5.5, targetCameraSpherical.radius + 0.35);
+          targetCameraSpherical.radius = Math.min(6.5, targetCameraSpherical.radius + 0.35);
         });
 
         document.querySelectorAll('.cam-preset-btn').forEach((btn) => {
@@ -2346,10 +2346,10 @@
           targetCameraSpherical.radius = Math.max(1.45, targetCameraSpherical.radius - 0.35);
         });
         document.getElementById('btnZoomOut').addEventListener('click', () => {
-          targetCameraSpherical.radius = Math.min(5.5, targetCameraSpherical.radius + 0.35);
+          targetCameraSpherical.radius = Math.min(6.5, targetCameraSpherical.radius + 0.35);
         });
         document.getElementById('btnFocusPole').addEventListener('click', () => {
-          targetCameraSpherical = { radius: 2.75, theta: 0.1, phi: 2.75 };
+          targetCameraSpherical = { radius: 4.6, theta: 0.1, phi: 2.75 };
         });
 
         // Simulation Playback Controls
